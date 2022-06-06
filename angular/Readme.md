@@ -27,7 +27,9 @@ http {
 In general, here we define the server on which application will be hosted, its port and default behaviour.
 
 More detail about the configuration file can be found in the 
-[nginx documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html#include).
+[nginx documentation](https://nginx.org/en/docs/http/ngx_http_core_module.html#include) 
+or more details here 
+[understanding the nginx configuration file structure and configuration contexts](https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts).
 
 #### 2. Create a Dockerfile file
 
