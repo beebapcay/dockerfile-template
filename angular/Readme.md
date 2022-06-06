@@ -90,4 +90,4 @@ next you map container port to your local (`-p <port>:80`)
 and finally you pick a base Docker image to be that you’ve just created - `<image_name>`.
 
 To check if new container is running in terminal type: `docker ps`. 
-Or you can enter a web browser and go to http://localhost:<port>/.
+Or you can enter a web browser and go to `http://localhost:<your_port>/`.
