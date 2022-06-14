@@ -1,0 +1,37 @@
+#FROM maven:3-alpine as deps
+#
+#WORKDIR /app
+#
+#COPY database-script/pom.xml database-script/pom.xml
+#COPY common/pom.xml common/pom.xml
+#COPY service/pom.xml service/pom.xml
+#COPY web/pom.xml web/pom.xml
+#COPY pom.xml pom.xml
+#
+#RUN mvn -B -e -C org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline \
+#    -DexcludeArtifactIds=proj-code-base-database-script,proj-code-base-common,proj-code-base-service,proj-code-base-web
+
+FROM maven:3-openjdk-11 as builder
+
+WORKDIR /app
+
+#COPY --from=deps /root/.m2 /root/.m2
+#COPY --from=deps /app .
+
+#COPY database-script/src database-script/src
+#COPY common/src common/src
+#COPY service/src service/src
+#COPY web/src web/src
+
+COPY . .
+
+RUN mvn -B -e -C org.apache.maven.plugins:maven-dependency-plugin:3.1.2:go-offline \
+    -DexcludeArtifactIds=proj-code-base-database-script,proj-code-base-common,proj-code-base-service,proj-code-base-web
+
+RUN mvn clean package
+
+WORKDIR /web/target
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar", "proj-code-base-web.jar"]
